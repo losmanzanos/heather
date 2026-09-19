@@ -39,6 +39,28 @@
   .btn-outline-forest{border-color:var(--forest);color:var(--forest);}
   .btn-outline-forest:hover{background:var(--forest);color:var(--cream);}
 
+
+  /* header / nav */
+  .site-head{background:var(--cream);position:sticky;top:0;z-index:70;border-bottom:3px solid var(--forest);}
+  .site-head .head-bar{display:flex;align-items:center;justify-content:space-between;gap:24px;
+            padding-top:16px;padding-bottom:16px;position:relative;}
+  .brand{display:flex;align-items:center;gap:13px;}
+  .brand-mark{display:block;width:46px;height:46px;flex:none;}
+  .brand-txt{line-height:1.05;}
+  .brand-name{display:block;font-weight:800;font-size:17px;}
+  .brand-sub{display:block;font-size:17px;color:var(--clay);margin-top:-1px;}
+  .nav-links{display:flex;align-items:center;gap:30px;}
+  .navcta{padding:11px 22px;font-size:14px;}
+  .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:48px;height:44px;
+          border:2.5px solid var(--forest);border-radius:3px;cursor:pointer;padding:0 11px;flex:none;
+          transition:background .18s;}
+  .burger span{display:block;height:2.5px;background:var(--forest);border-radius:2px;transition:transform .22s,opacity .18s;}
+  .burger:hover{background:rgba(31,61,50,.07);}
+  #navtog:checked~.head-bar .burger{background:var(--forest);}
+  #navtog:checked~.head-bar .burger span{background:var(--cream);}
+  #navtog:checked~.head-bar .burger span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+  #navtog:checked~.head-bar .burger span:nth-child(2){opacity:0;}
+  #navtog:checked~.head-bar .burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
   .navlink{font-weight:600;font-size:15px;position:relative;padding:4px 0;}
   .navlink::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:currentColor;transition:right .2s ease;}
   .navlink:hover::after{right:0;}
@@ -46,7 +68,7 @@
   .eyebrow{font-family:'Yellowtail',cursive;font-size:24px;line-height:1;margin:0 0 14px;}
 
   /* hero */
-  .hero-inner{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center;padding:74px 0 82px;}
+  .hero-inner{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center;padding:104px 0 92px;}
   .hero h1{font-weight:800;font-size:clamp(34px,4.1vw,55px);line-height:1.0;color:var(--cream);margin-bottom:22px;}
   .hero p.lede{font-size:17.5px;line-height:1.65;color:var(--cream);opacity:.88;max-width:45ch;margin:0 0 30px;}
   .blob-stack{position:relative;width:100%;max-width:440px;margin-left:auto;aspect-ratio:200/204;}
@@ -77,19 +99,31 @@
 
   @media (max-width:1000px){
     .wrap{padding:0 30px;}
-    .hero-inner{grid-template-columns:1fr;gap:44px;padding:56px 0 64px;}
+    .hero-inner{grid-template-columns:1fr;gap:44px;padding:76px 0 66px;}
     .blob-stack{margin:0 auto;max-width:360px;}
     .blob-back{transform:translate(-18px,-16px);}
     .fit{grid-template-columns:1fr;gap:26px;}
     .mods{grid-template-columns:repeat(2,1fr);gap:36px 28px;}
   }
+  @media (max-width:980px){
+    .burger{display:flex;}
+    .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+               background:var(--cream);border-top:3px solid var(--forest);border-bottom:3px solid var(--forest);
+               padding:6px 22px 22px;margin:0;
+               max-height:0;overflow:hidden;opacity:0;visibility:hidden;
+               transition:max-height .3s ease,opacity .22s ease,visibility .22s;}
+    #navtog:checked~.head-bar .nav-links{max-height:420px;opacity:1;visibility:visible;}
+    .nav-links .navlink{font-size:17px;padding:15px 0;border-bottom:2px solid rgba(31,61,50,.14);}
+    .nav-links .navlink::after{display:none;}
+    .navcta{width:100%;margin-top:18px;padding:16px 22px;font-size:15px;}
+    .brand-name{font-size:16px;} .brand-sub{font-size:15px;}
+  }
   @media (max-width:620px){
     .wrap{padding:0 22px;}
+    .hero-inner{padding:58px 0 54px;}
     .mods{grid-template-columns:1fr;}
     .cta-row{flex-direction:column;align-items:stretch;}
     .btn{width:100%;}
-    .nav-links{gap:18px;}
-    .nav-links .btn{width:auto;}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none !important;}}
 </style>
@@ -97,21 +131,23 @@
 <body>
 
 <!-- NAV -->
-<header style="background:var(--cream);">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:18px;padding-bottom:18px;">
-    <a href="#top" style="display:flex;align-items:center;gap:13px;">
-      <span style="display:block;width:46px;height:46px;"><svg viewBox="0 0 120 120" width="46" height="46" aria-hidden="true"><g stroke="var(--clay)" stroke-width="2.4" stroke-linecap="round"><line x1="60" y1="60" x2="60.0" y2="10.0"/><line x1="60" y1="60" x2="77.0" y2="30.6"/><line x1="60" y1="60" x2="103.3" y2="35.0"/><line x1="60" y1="60" x2="94.0" y2="60.0"/><line x1="60" y1="60" x2="103.3" y2="85.0"/><line x1="60" y1="60" x2="77.0" y2="89.4"/><line x1="60" y1="60" x2="60.0" y2="110.0"/><line x1="60" y1="60" x2="43.0" y2="89.4"/><line x1="60" y1="60" x2="16.7" y2="85.0"/><line x1="60" y1="60" x2="26.0" y2="60.0"/><line x1="60" y1="60" x2="16.7" y2="35.0"/><line x1="60" y1="60" x2="43.0" y2="30.6"/></g><g fill="var(--ochre)"><circle cx="60.0" cy="10.0" r="3.4"/><circle cx="77.0" cy="30.6" r="2.4"/><circle cx="103.3" cy="35.0" r="3.4"/><circle cx="94.0" cy="60.0" r="2.4"/><circle cx="103.3" cy="85.0" r="3.4"/><circle cx="77.0" cy="89.4" r="2.4"/><circle cx="60.0" cy="110.0" r="3.4"/><circle cx="43.0" cy="89.4" r="2.4"/><circle cx="16.7" cy="85.0" r="3.4"/><circle cx="26.0" cy="60.0" r="2.4"/><circle cx="16.7" cy="35.0" r="3.4"/><circle cx="43.0" cy="30.6" r="2.4"/></g><circle cx="60" cy="60" r="7" fill="var(--ochre)"/></svg></span>
-      <span style="line-height:1.05;">
-        <span class="display" style="display:block;font-weight:800;font-size:17px;">Heather Daniel</span>
-        <span class="script" style="display:block;font-size:17px;color:var(--clay);margin-top:-1px;">counseling &amp; somatic work</span>
+<header class="site-head">
+  <input type="checkbox" id="navtog" hidden>
+  <div class="wrap head-bar">
+    <a class="brand" href="#top">
+      <span class="brand-mark"><svg viewBox="0 0 120 120" width="46" height="46" aria-hidden="true"><g stroke="var(--clay)" stroke-width="2.4" stroke-linecap="round"><line x1="60" y1="60" x2="60.0" y2="10.0"/><line x1="60" y1="60" x2="77.0" y2="30.6"/><line x1="60" y1="60" x2="103.3" y2="35.0"/><line x1="60" y1="60" x2="94.0" y2="60.0"/><line x1="60" y1="60" x2="103.3" y2="85.0"/><line x1="60" y1="60" x2="77.0" y2="89.4"/><line x1="60" y1="60" x2="60.0" y2="110.0"/><line x1="60" y1="60" x2="43.0" y2="89.4"/><line x1="60" y1="60" x2="16.7" y2="85.0"/><line x1="60" y1="60" x2="26.0" y2="60.0"/><line x1="60" y1="60" x2="16.7" y2="35.0"/><line x1="60" y1="60" x2="43.0" y2="30.6"/></g><g fill="var(--ochre)"><circle cx="60.0" cy="10.0" r="3.4"/><circle cx="77.0" cy="30.6" r="2.4"/><circle cx="103.3" cy="35.0" r="3.4"/><circle cx="94.0" cy="60.0" r="2.4"/><circle cx="103.3" cy="85.0" r="3.4"/><circle cx="77.0" cy="89.4" r="2.4"/><circle cx="60.0" cy="110.0" r="3.4"/><circle cx="43.0" cy="89.4" r="2.4"/><circle cx="16.7" cy="85.0" r="3.4"/><circle cx="26.0" cy="60.0" r="2.4"/><circle cx="16.7" cy="35.0" r="3.4"/><circle cx="43.0" cy="30.6" r="2.4"/></g><circle cx="60" cy="60" r="7" fill="var(--ochre)"/></svg></span>
+      <span class="brand-txt">
+        <span class="display brand-name">Heather Daniel</span>
+        <span class="script brand-sub">counseling &amp; somatic work</span>
       </span>
     </a>
-    <nav class="nav-links" style="display:flex;align-items:center;gap:30px;flex-wrap:wrap;">
+    <label class="burger" for="navtog" aria-label="Menu"><span></span><span></span><span></span></label>
+    <nav class="nav-links">
       <a class="navlink" href="#fit">Is this a fit?</a>
       <a class="navlink" href="#work">How I work</a>
       <a class="navlink" href="#about">About</a>
       <a class="navlink" href="#rates">Rates</a>
-      <a class="btn btn-forest" href="#contact" style="padding:11px 22px;font-size:14px;">Free consult</a>
+      <a class="btn btn-forest navcta" href="#contact">Free consult</a>
     </nav>
   </div>
 </header>
@@ -282,5 +318,10 @@
   }
 </style>
 
+<script>
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click', function(){ var c=document.getElementById('navtog'); if(c) c.checked=false; });
+});
+</script>
 </body>
 </html>
